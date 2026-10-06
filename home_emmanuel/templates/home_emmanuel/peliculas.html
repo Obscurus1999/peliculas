@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Películas de {{ genero.nombre }}{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h1 class="h2">Género: {{ genero.nombre }}</h1>
+        <p class="text-muted">{{ genero.descripcion }}</p>
+    </div>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-start">
+    {% for pelicula in genero.peliculas %}
+        <div class="col">
+            <div class="card h-100 shadow-sm">
+                <img src="{% static pelicula.imagen %}" class="card-img-top w-100 object-fit-contain bg-dark p-2" alt="{{ pelicula.nombre }}" style="height: 380px;">
+                <div class="card-body">
+                    <h5 class="card-title">{{ pelicula.nombre }}</h5>
+                    <p class="card-text mb-0">
+                        <strong>Clasificación de edad:</strong> 
+                        <span class="badge bg-info text-dark">{{ pelicula.edad }}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
